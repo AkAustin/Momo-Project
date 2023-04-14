@@ -4,16 +4,16 @@ using namespace std;
 
 int main() {
 	cout<<" **************************************AUSTIN MOBILE MONEY SERVICE**************************************"<<endl;
-	const int defaultpin = 0000;
 	int attempts = 0;
 	char option, Y, N;
-	int pin, c_pin, new_pin, select;
+	int select;
 	float amount;
-	float balance, counter, reference;
-	string digits, MomoCode;
+	float balance, counter;
+	string defaultpin, pin, c_pin, new_pin, reference, digits, MomoCode;
 	string number, num2; 
 	balance=1000;
-	
+	defaultpin = "0000";
+
 	jump:
 	cout<<"\nEnter Mobile Money Code: "<<endl;
 	cin>>MomoCode;
@@ -29,6 +29,7 @@ int main() {
 		cout<<"0. Exit \n"<<endl;
 		cin>>select;
 	}
+	
 	else
 	{
 		cout<<"\n Enter the correct code"<<endl;
@@ -46,35 +47,30 @@ if(select==1)
 		
 		do
 		{			
-    		attempts++;
-    		cout << "\nPlease enter your 4-digit PIN: " << endl;
-    		cin >> pin;
+    			attempts++;
+    			cout << "\nPlease enter your 4-digit PIN: " << endl;
+    			cin >> pin;
+					
 
-    		if (pin != defaultpin)
-    		{
-        		cout << "\nIncorrect PIN. " << endl;
-    		}
+    			if (pin != defaultpin)
+    			{
+        			cout << "\nIncorrect PIN. " << endl;
+    			}
     		
 			else if (pin == defaultpin)
-    		{
-        		cout << "\nYour balance is GHc" << balance << endl;
-        		goto next;
-    		}
+    			{
+        			cout << "\nYour balance is GHc" << balance << endl;
+        			goto next;
+    			}
 		} 
 			while (attempts < 3);
 
 			if (attempts >= 3)
 			{
-    			cout << "\nMaximum attempts reached.";
-    			cout << "Exiting Program...." << endl;
-    			goto transfer;
+    				cout << "\nMaximum attempts reached.";
+    				cout << "Exiting Program...." << endl;
+    				goto transfer;
 			}
-
-		switch (pin)
-		{
-    	// case statements here
-    		break;
-		}
 	}
 	
 	else if(select==0)
@@ -88,7 +84,9 @@ else if(select==2)
 	cout<<"\n Are You Sure You Want To Change Your Pin  "<<endl;
 	cout<<"\nChoose Y/N "<<endl;
 	cin>>option;
-	if(option=='Y' || option=='y'){
+	
+	if(option=='Y' || option=='y')
+	{
 		cout<<"\nEnter New Pin" <<endl;
 		cin>>new_pin;
 		pin==new_pin;
@@ -109,7 +107,8 @@ else if(select==2)
 else if(select==3)
 {
 	cout<<"\n1. MTN Network"<<endl;
-	cout<<"2. Other Networks"<<endl;
+	cout<<"2. Vodafone Network"<<endl;
+	cout<<"3. Airteltigo Network"<<endl;
 	cout<<"0. Back \n"<<endl;
 	cin>>select;
 	
@@ -120,14 +119,14 @@ else if(select==3)
     		cin >> number;
 
     			if (number.length() != 10) 
-				{
+			{
         			cout << "\n Invalid number. Please enter a 10-digit number." << endl;
         			goto here;
     			}
 
     			string prefix = number.substr(0, 3);
     			if (prefix != "024" && prefix != "055" && prefix != "059" && prefix != "025") 
-				{
+			{
         			cout << "\n Invalid number. Please enter MTN Number." << endl;
         			goto here;
     			}
@@ -173,7 +172,7 @@ else if(select==3)
 		
 					else if (pin== defaultpin)
 					{
-						cout<<"You have successfully sent "<<amount<<" to "<<number<<endl;
+						cout<<"\nYou have successfully sent "<<amount<<" to "<<number<<endl;
 						cout<<"Your current balance is GHc "<<balance-amount<<endl;	
 						goto next;	
 					}
@@ -188,19 +187,27 @@ else if(select==3)
     					cout << "Exiting Program...." << endl;
     					goto transfer;
 					}
-				
-				switch(pin)
-				{
-					break;
-				}
-		}
+}
 		
 		else if(select==2)
 		{
 				Hi:
-			cout<<"\nEnter Number: "<<endl;
+			cout<<"\nEnter Vodafone Number: "<<endl;
 			cin>>number;
-							
+				
+				if (number.length() != 10) 
+				{
+        			cout << "\n Invalid number. Please enter a 10-digit number." << endl;
+        			goto Hi;
+    			}
+    			
+			string prefix = number.substr(0, 3);
+    			if (prefix != "020" && prefix != "050") 
+				{
+        			cout << "\n Invalid number. Please enter Vodafone Number." << endl;
+					goto Hi;
+				}
+
 			cout<<"\nEnter the Number again"<<endl;
 			cin>>num2;
 			
@@ -227,38 +234,107 @@ else if(select==3)
 					}
 					
 								
-		do
-		{			
-    		attempts++;
-    		cout << "\nPlease enter your 4-digit PIN: " << endl;
-    		cin >> pin;
+			do
+			{			
+    				attempts++;
+    				cout << "\nPlease enter your 4-digit PIN: " << endl;
+    				cin >> pin;
 
-    		if (pin != defaultpin)
-    		{
-        		cout << "\nIncorrect PIN. " << endl;
-    		}
+    				if (pin != defaultpin)
+    				{
+        				cout << "\nIncorrect PIN. " << endl;
+    				}
     		
-			else if (pin == defaultpin)
-    		{
-    			cout<<"You have successfully sent "<<amount<<" to "<<number<<endl;
-				cout<<"Your current balance is GHc "<<balance-amount<<endl;	
-        		goto next;
-    		}
-		} 
-			while (attempts < 3);
+				else if (pin == defaultpin)
+    				{
+    					cout<<"\nYou have successfully sent "<<amount<<" to "<<number<<endl;
+					cout<<"Your current balance is GHc "<<balance-amount<<endl;	
+        				goto next;
+    				}
+			} 
+					
+				while (attempts < 3);
 
-			if (attempts >= 3)
-			{
-    			cout << "\nMaximum attempts reached.";
-    			cout << "Exiting Program...." << endl;
-    			goto transfer;
-			}
-
-		switch (pin)
-		{
-    	// case statements here
-    		break;
+				if (attempts >= 3)
+				{
+    					cout << "\nMaximum attempts reached.";
+    					cout << "Exiting Program...." << endl;
+    					goto transfer;
+				}
 		}
+		
+		else if (select==3)
+		{
+			Third:
+			cout<<"\nEnter Airteltigo Number: "<<endl;
+			cin>>number;
+				
+				if (number.length() != 10) 
+				{
+        				cout << "\n Invalid number. Please enter a 10-digit number." << endl;
+        				goto Third;
+    				}
+    			
+			string prefix = number.substr(0, 3);
+    			if (prefix != "027" && prefix != "057") 
+				{
+        				cout << "\n Invalid number. Please enter Airteltigo Number." << endl;
+					goto Third;
+				}
+
+			cout<<"\nEnter the Number again"<<endl;
+			cin>>num2;
+			
+				if(number !=num2)
+				{
+					cout<<"\n Wrong number";
+					goto Third;
+				}
+				
+				
+				cout<<"\nEnter Amount To Transfer "<<endl;
+				cin>>amount;
+			
+				cout<<"Transfer GHc"<<amount<<" to "<<number<<endl;
+			
+				cout<<"\nEnter Reference "<<endl;
+				cin>>reference;
+					
+					if(balance < amount)
+					{
+						cout<<"\n Your balance is insufficient"<<endl;	
+						cout<<" OK "<<endl;
+						goto next;
+					}
+					
+								
+			do
+			{			
+    				attempts++;
+    				cout << "\nPlease enter your 4-digit PIN: " << endl;
+    				cin >> pin;
+
+    				if (pin != defaultpin)
+    				{
+        				cout << "\nIncorrect PIN. " << endl;
+    				}
+    		
+				else if (pin == defaultpin)
+    				{
+    					cout<<"\nYou have successfully sent "<<amount<<" to "<<number<<endl;
+					cout<<"Your current balance is GHc "<<balance-amount<<endl;	
+        				goto next;
+    				}
+			} 
+					
+				while (attempts < 3);
+
+				if (attempts >= 3)
+				{
+    					cout << "\nMaximum attempts reached.";
+    					cout << "Exiting Program...." << endl;
+    					goto transfer;
+				}
 		}
 		
 		else if(select==0)
